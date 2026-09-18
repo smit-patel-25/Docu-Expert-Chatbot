@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.streamlit/secrets.toml
+
+# Source PDF is large and re-downloadable; see data/raw/README.md
+data/raw/*.pdf

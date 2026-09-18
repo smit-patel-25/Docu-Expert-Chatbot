@@ -1,0 +1,15 @@
+[project]
+name = "docu-expert-chatbot"
+version = "0.1.0"
+description = "A grounded RAG chatbot that answers only from a source document, with conversation memory."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=2.24.0",
+    "langchain-core>=1.6.3",
+    "langchain-google-genai>=4.4.0",
+    "langchain-text-splitters>=1.1.2",
+    "pypdf>=6.19.0",
+    "python-dotenv>=1.2.3",
+    "streamlit>=1.64.0",
+]

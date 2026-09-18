@@ -1,0 +1,66 @@
+[
+  {
+    "q": "What circumference must the match ball be?",
+    "expect": "answer",
+    "must_contain": ["68"]
+  },
+  {
+    "q": "How long is each half of a match?",
+    "expect": "answer",
+    "must_contain": ["45"]
+  },
+  {
+    "q": "How far is the penalty mark from the goal line?",
+    "expect": "answer",
+    "must_contain": ["11"]
+  },
+  {
+    "q": "What is the radius of the corner area?",
+    "expect": "answer",
+    "must_contain": ["1 m"]
+  },
+  {
+    "q": "How far must opponents stay from the corner arc at a corner kick?",
+    "expect": "answer",
+    "must_contain": ["9.15"]
+  },
+  {
+    "q": "How wide can the lines marking the field be?",
+    "expect": "answer",
+    "must_contain": ["12"]
+  },
+  {
+    "q": "What colour must the players' shirts be compared to the opponents?",
+    "expect": "answer"
+  },
+  {
+    "q": "And can that be reduced?",
+    "expect": "answer",
+    "must_contain": ["agree"],
+    "history": [
+      {"role": "user", "content": "How long is each half of a match?"},
+      {"role": "assistant", "content": "A match lasts for two equal halves of 45 minutes. [1]"}
+    ],
+    "note": "memory test: the question is meaningless without the previous turn"
+  },
+  {
+    "q": "Who won the 2022 FIFA World Cup?",
+    "expect": "refuse"
+  },
+  {
+    "q": "What is the capital of France?",
+    "expect": "refuse"
+  },
+  {
+    "q": "How much does a Premier League referee get paid per match?",
+    "expect": "refuse"
+  },
+  {
+    "q": "Which club has won the most Champions League titles?",
+    "expect": "refuse"
+  },
+  {
+    "q": "What is the offside rule in rugby union?",
+    "expect": "refuse"
+  }
+]
