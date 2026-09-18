@@ -19,6 +19,14 @@ def bootstrap():
     return index.load(), chat.llm()
 
 
+@st.cache_data
+def manifest() -> dict:
+    """What the index actually contains — written by scripts/ingest.py."""
+    if config.MANIFEST_PATH.exists():
+        return json.loads(config.MANIFEST_PATH.read_text(encoding="utf-8"))
+    return {"title": config.DOCUMENT.name, "sections": [], "chunks": 0}
+
+
 if not config.API_KEY:
     st.error("GEMINI_API_KEY is not set. Copy `.env.example` to `.env` and add your key.")
     st.stop()
@@ -35,9 +43,21 @@ st.session_state.setdefault("grounded", None)
 
 chat_col, source_col = st.columns([2, 1], gap="large")
 
+doc = manifest()
+
 with chat_col:
     st.title("Docu-Expert")
-    st.caption(f"Answers only from **{config.DOCUMENT.name}**")
+    st.caption(
+        f"Every answer comes only from **{doc['title']}**"
+        + (f" — {doc['subtitle']}" if doc.get("subtitle") else "")
+        + f". Anything outside it gets *\"{config.REFUSAL}\"*"
+    )
+
+    with st.expander(f"What's in this document? "
+                     f"({len(doc['sections'])} sections, {doc['chunks']} chunks)"):
+        st.markdown("\n".join(f"- {section}" for section in doc["sections"]))
+        if doc.get("source_url"):
+            st.markdown(f"[View the original document]({doc['source_url']})")
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):

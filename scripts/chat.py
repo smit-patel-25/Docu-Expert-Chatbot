@@ -17,7 +17,7 @@ QUIT = {"quit", "exit", "q"}
 store, model = index.load(), chat.llm()
 history = []
 
-print(f"Docu-Expert — answers only from {config.DOCUMENT.name}")
+print(f"Docu-Expert — answers only from {config.DOCUMENT_TITLE}")
 print("Type 'quit' to stop.\n")
 
 while True:

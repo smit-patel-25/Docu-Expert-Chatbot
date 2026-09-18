@@ -101,10 +101,20 @@ lines of parsing heuristics, so that was done **once**, offline, and the clean
 markdown is what's committed. Prep work belongs in a prep step, not in code you
 re-read every time. See `data/raw/README.md`.
 
+## Telling the user what the bot covers
+
+The app names its source document in the header and has a **"What's in this
+document?"** expander listing every indexed section plus a link to the original.
+That list comes from `data/index/document.json`, which `scripts/ingest.py` writes
+from the chunks it actually embedded — so it can't drift out of sync with what
+the bot can really answer.
+
 ## Swapping the document
 
-Point `config.DOCUMENT` at any `.md`, `.txt` or `.pdf`, re-run `scripts/ingest.py`,
-and update `eval/questions.json` and `data/suggestions.json` to match.
+1. Point `config.DOCUMENT` at any `.md`, `.txt` or `.pdf`.
+2. Update `DOCUMENT_TITLE`, `DOCUMENT_SUBTITLE` and `DOCUMENT_SOURCE_URL` in `config.py`.
+3. Re-run `scripts/ingest.py` (rebuilds the index and the manifest).
+4. Update `eval/questions.json` and `data/suggestions.json` to match.
 
 ## Deploying
 

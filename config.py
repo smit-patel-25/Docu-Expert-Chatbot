@@ -28,6 +28,12 @@ EMBED_MODEL = "models/gemini-embedding-001"
 ROOT = Path(__file__).parent
 DOCUMENT = ROOT / "data" / "raw" / "laws-of-the-game.md"
 INDEX_PATH = ROOT / "data" / "index" / "vectorstore.json"
+MANIFEST_PATH = ROOT / "data" / "index" / "document.json"
+
+# Shown in the UI so a user knows what the bot is and isn't able to answer.
+DOCUMENT_TITLE = "IFAB Laws of the Game 2024/25"
+DOCUMENT_SUBTITLE = "The 17 Laws of association football"
+DOCUMENT_SOURCE_URL = "https://www.theifab.com/laws-of-the-game-documents/"
 
 CHUNK_SIZE, CHUNK_OVERLAP = 900, 150
 TOP_K = 5
