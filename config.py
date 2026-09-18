@@ -8,6 +8,16 @@ load_dotenv()
 
 API_KEY = os.getenv("GEMINI_API_KEY", "")
 
+if not API_KEY:
+    # Streamlit Community Cloud supplies the key through its Secrets panel rather
+    # than a .env file. Wrapped, because the CLI scripts run without Streamlit.
+    try:
+        import streamlit as st
+
+        API_KEY = st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        pass
+
 # Pinned to explicit versions, not the "-latest" aliases: an alias moves under you,
 # which is what pinning is meant to prevent.
 # flash-lite, not flash: the free tier allows only 5 requests/minute for the bigger

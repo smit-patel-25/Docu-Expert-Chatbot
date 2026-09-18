@@ -108,6 +108,24 @@ and update `eval/questions.json` and `data/suggestions.json` to match.
 
 ## Deploying
 
-Push to GitHub, point [Streamlit Community Cloud](https://share.streamlit.io) at
-`app.py`, and add `GEMINI_API_KEY` in its Secrets panel. `data/index/` is
-committed, so the deployed app has no ingestion step at boot.
+[Streamlit Community Cloud](https://share.streamlit.io) — free, deploys from
+GitHub, no card needed.
+
+1. Push the repo to GitHub (public is simplest; the free tier allows one private app).
+2. On share.streamlit.io: **New app** → pick the repo, branch `main`, main file `app.py`.
+3. **Advanced settings → Python 3.12** (it won't read `.python-version`).
+4. **Secrets**, paste:
+   ```toml
+   GEMINI_API_KEY = "your-key"
+   ```
+5. Deploy.
+
+Notes:
+
+- Dependencies come from `requirements.txt`, not `pyproject.toml`. Regenerate it
+  after changing dependencies: `uv export --no-hashes --no-dev --no-emit-project -o requirements.txt`
+- `data/index/vectorstore.json` (9.4 MB) is committed on purpose, so the deployed
+  app never runs ingestion at boot — which would need embedding quota it doesn't have.
+- `.env` is gitignored; `config.py` falls back to `st.secrets` so the same code
+  works locally and deployed.
+- Apps sleep after inactivity, so the first load after a pause takes ~30s.
